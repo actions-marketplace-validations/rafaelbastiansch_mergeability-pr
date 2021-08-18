@@ -3,6 +3,8 @@ import * as github from '@actions/github'
 
 type ClientType = ReturnType<typeof github.getOctokit>;
 
+const mergeableStatus = ['unstable', 'clean']
+
 export async function run() {
   try {
     const token = core.getInput('repo-token', { required: true })
@@ -22,6 +24,13 @@ export async function run() {
     });
 
     core.debug(`fetching changed files for pr #${prNumber}`)
+
+    // check mergeability
+    if (!mergeableStatus.includes(pullRequest.mergeable_state)) {
+      core.setFailed(`mergeableStatus ${pullRequest.mergeable_state} is not allowed for mergeability`);
+    }
+
+    core.debug(`PR with ${pullRequest.mergeable_state} can be merged`)
 
     console.log('works pull request', pullRequest)
   } catch (error) {

@@ -38,6 +38,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = void 0;
 const core = __importStar(__nccwpck_require__(186));
 const github = __importStar(__nccwpck_require__(438));
+const mergeableStatus = ['unstable', 'clean'];
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -54,6 +55,11 @@ function run() {
                 pull_number: prNumber,
             });
             core.debug(`fetching changed files for pr #${prNumber}`);
+            // check mergeability
+            if (!mergeableStatus.includes(pullRequest.mergeable_state)) {
+                core.setFailed(`mergeableStatus ${pullRequest.mergeable_state} is not allowed for mergeability`);
+            }
+            core.debug(`PR with ${pullRequest.mergeable_state} can be merged`);
             console.log('works pull request', pullRequest);
         }
         catch (error) {
