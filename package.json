@@ -1,0 +1,23 @@
+{
+  "name": "mergeability",
+  "version": "1.0.0",
+  "description": "Action to verify mergeability of a pull request",
+  "main": "index.js",
+  "author": "Rafael Bastiansch",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc && ncc build lib/main.js"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.6.1",
+    "@vercel/ncc": "^0.29.1",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@actions/core": "^1.4.0",
+    "@actions/github": "^5.0.0"
+  }
+}

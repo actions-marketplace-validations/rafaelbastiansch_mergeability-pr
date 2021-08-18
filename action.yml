@@ -1,0 +1,11 @@
+name: 'Mergeability'
+description: 'Watch for mergeability of a pull request'
+author: 'Rafael Bastiansch'
+inputs:
+  repo-token:
+    description: 'The GITHUB_TOKEN secret'
+    required: true
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
