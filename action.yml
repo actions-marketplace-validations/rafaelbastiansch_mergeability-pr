@@ -1,4 +1,4 @@
-name: 'Mergeability'
+name: 'mergeability-pr'
 description: 'Watch for mergeability of a pull request'
 author: 'Rafael Bastiansch'
 inputs:

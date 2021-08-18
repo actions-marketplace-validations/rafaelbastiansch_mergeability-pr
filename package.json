@@ -1,5 +1,5 @@
 {
-  "name": "mergeability",
+  "name": "mergeability-pr",
   "version": "1.0.0",
   "description": "Action to verify mergeability of a pull request",
   "main": "index.js",

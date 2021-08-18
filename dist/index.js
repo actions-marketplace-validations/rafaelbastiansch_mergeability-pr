@@ -54,7 +54,7 @@ function run() {
                 pull_number: prNumber,
             });
             core.debug(`fetching changed files for pr #${prNumber}`);
-            console.log('works', pullRequest);
+            console.log('works pull request', pullRequest);
         }
         catch (error) {
             core.error(error);
