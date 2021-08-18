@@ -6,7 +6,9 @@
   "author": "Rafael Bastiansch",
   "license": "MIT",
   "scripts": {
-    "build": "tsc && ncc build lib/main.js"
+    "build": "tsc && ncc build lib/main.js",
+    "test": "jest",
+    "testw": "jest --watch"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",

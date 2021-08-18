@@ -23,16 +23,10 @@ export async function run() {
       pull_number: prNumber,
     });
 
-    core.debug(`fetching changed files for pr #${prNumber}`)
+    core.info(`fetching changed files for pr #${prNumber}`)
+    checkMergeability(pullRequest)
 
-    // check mergeability
-    if (!mergeableStatus.includes(pullRequest.mergeable_state)) {
-      core.setFailed(`mergeableStatus ${pullRequest.mergeable_state} is not allowed for mergeability`);
-    }
-
-    core.debug(`PR with ${pullRequest.mergeable_state} can be merged`)
-
-    console.log('works pull request', pullRequest)
+    core.info(`PR with ${pullRequest.mergeable_state} can be merged`)
   } catch (error) {
     core.error(error)
     core.setFailed(error.message)
@@ -46,4 +40,10 @@ function getPrNumber(): number | undefined {
   }
 
   return pullRequest.number
+}
+
+function checkMergeability (pullRequest): void {
+  if (!mergeableStatus.includes(pullRequest.mergeable_state)) {
+    core.setFailed(`mergeableStatus ${pullRequest.mergeable_state} is not allowed for mergeability`);
+  }
 }

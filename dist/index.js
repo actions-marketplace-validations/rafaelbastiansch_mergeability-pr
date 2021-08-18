@@ -54,13 +54,9 @@ function run() {
                 repo: github.context.repo.repo,
                 pull_number: prNumber,
             });
-            core.debug(`fetching changed files for pr #${prNumber}`);
-            // check mergeability
-            if (!mergeableStatus.includes(pullRequest.mergeable_state)) {
-                core.setFailed(`mergeableStatus ${pullRequest.mergeable_state} is not allowed for mergeability`);
-            }
-            core.debug(`PR with ${pullRequest.mergeable_state} can be merged`);
-            console.log('works pull request', pullRequest);
+            core.info(`fetching changed files for pr #${prNumber}`);
+            checkMergeability(pullRequest);
+            core.info(`PR with ${pullRequest.mergeable_state} can be merged`);
         }
         catch (error) {
             core.error(error);
@@ -75,6 +71,11 @@ function getPrNumber() {
         return undefined;
     }
     return pullRequest.number;
+}
+function checkMergeability(pullRequest) {
+    if (!mergeableStatus.includes(pullRequest.mergeable_state)) {
+        core.setFailed(`mergeableStatus ${pullRequest.mergeable_state} is not allowed for mergeability`);
+    }
 }
 
 
